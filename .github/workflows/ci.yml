@@ -16,8 +16,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Clean npm cache
+        run: npm cache clean --force
       - name: Install dependencies
-        run: npm install --legacy-peer-deps --no-integrity
+        run: npm install --legacy-peer-deps --no-package-lock
       - name: Run linter
         run: npm run lint || true  # Добавляем || true, чтобы избежать сбоя на этом этапе
 
@@ -30,8 +32,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Clean npm cache
+        run: npm cache clean --force
       - name: Install dependencies
-        run: npm install --legacy-peer-deps --no-integrity
+        run: npm install --legacy-peer-deps --no-package-lock
       - name: Run tests
         run: npm test || true  # Добавляем || true, чтобы избежать сбоя на этом этапе
 
@@ -44,8 +48,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Clean npm cache
+        run: npm cache clean --force
       - name: Install dependencies
-        run: npm install --legacy-peer-deps --no-integrity
+        run: npm install --legacy-peer-deps --no-package-lock
       - name: Build packages
         run: npm run build || echo "Build failed but continuing"
       - name: Create artifact directories if they don't exist
