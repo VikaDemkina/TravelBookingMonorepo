@@ -33,5 +33,5 @@ jobs:
       - name: Store metrics
         uses: actions/upload-artifact@v4
         with:
-          name: build-metrics
+          name: metrics-artifact
           path: metrics.json
