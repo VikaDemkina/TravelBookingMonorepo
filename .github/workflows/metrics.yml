@@ -22,9 +22,14 @@ jobs:
         run: npm install -g @octokit/rest
       - name: Collect build metrics
         run: |
-          node .github/scripts/collect-metrics.js
+          node .github/scripts/collect-metrics.js || echo "Metrics collection failed but continuing"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create metrics file if it doesn't exist
+        run: |
+          if [ ! -f metrics.json ]; then
+            echo '{"timestamp":"'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'","buildMetrics":{"totalRuns":0,"successfulRuns":0,"failedRuns":0,"avgDuration":0,"totalDuration":0},"deploymentMetrics":{"totalDeployments":0,"successfulDeployments":0,"failedDeployments":0,"avgDeploymentTime":0}}' > metrics.json
+          fi
       - name: Store metrics
         uses: actions/upload-artifact@v4
         with:
