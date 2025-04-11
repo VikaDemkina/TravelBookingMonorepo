@@ -1,0 +1,32 @@
+name: Metrics Collection
+
+on:
+  workflow_run:
+    workflows: ["CI", "CD"]
+    types:
+      - completed
+  schedule:
+    - cron: '0 0 * * *'  # Ежедневно в полночь
+
+jobs:
+  collect-metrics:
+    name: Collect Build and Deployment Metrics
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install -g @octokit/rest
+      - name: Collect build metrics
+        run: |
+          node .github/scripts/collect-metrics.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Store metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-metrics
+          path: metrics.json
