@@ -10,9 +10,14 @@
     "build": "turbo run build",
     "start": "turbo run start",
     "lint": "turbo run lint",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "deploy:local": "sh scripts/deploy-local.sh",
+    "start:local": "sh scripts/start-local.sh",
+    "deploy:ci": "npm run build && npm run deploy:local",
+    "metrics": "node .github/scripts/collect-metrics.js"
   },
   "devDependencies": {
-    "turbo": "^2.0.0"
+    "turbo": "^2.0.0",
+    "@octokit/rest": "^19.0.8"
   }
 }
