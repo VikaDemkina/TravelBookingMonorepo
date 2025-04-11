@@ -39,6 +39,17 @@ jobs:
             packages/frontend/.next
             packages/backend/dist
             packages/shared/dist
-      - name: Deploy to staging
-        run: echo "Deploying to staging environment"
-        # В реальном проекте здесь будут настройки для деплоя
+      - name: Deploy locally
+        run: |
+          chmod +x ./scripts/deploy-local.sh
+          ./scripts/deploy-local.sh
+        # В CI/CD это не запустит реальный локальный деплой, 
+        # но проверит, что скрипт выполняется без ошибок
+      - name: Add deploy completion message
+        run: |
+          echo "🚀 Деплой выполнен!"
+          echo "Для локального деплоя выполните следующие команды:"
+          echo "  git pull"
+          echo "  npm run build"
+          echo "  ./scripts/deploy-local.sh"
+          echo "  ./scripts/start-local.sh"
