@@ -10,6 +10,7 @@
   - `shared/` - Общие типы и компоненты
 - `.github/` - GitHub Actions и workflow для CI/CD
 - `docs/` - Документация
+- `scripts/` - Скрипты для деплоя и вспомогательных операций
 
 ## Быстрый старт
 
@@ -27,6 +28,27 @@ npm install
 npm run dev
 ```
 
+## Локальный деплой
+
+Для локального деплоя и запуска приложения:
+
+```bash
+# Сборка всех пакетов
+npm run build
+
+# Деплой приложения локально
+npm run deploy:local
+
+# Запуск развернутого приложения
+npm run start:local
+```
+
+После запуска:
+- Frontend будет доступен по адресу: http://localhost:5080
+- Backend API будет доступен по адресу: http://localhost:3001
+
+Подробная документация по локальному деплою: [LOCAL_DEPLOY.md](./docs/LOCAL_DEPLOY.md)
+
 ## Команды
 
 - `npm run dev` - запуск всех пакетов в режиме разработки
@@ -34,6 +56,10 @@ npm run dev
 - `npm run start` - запуск собранных пакетов
 - `npm run lint` - линтинг кода
 - `npm run test` - запуск тестов
+- `npm run deploy:local` - локальный деплой приложения
+- `npm run start:local` - запуск локально развернутого приложения
+- `npm run deploy:ci` - сборка и деплой (для CI)
+- `npm run metrics` - сбор метрик производительности
 
 ## CI/CD и метрики
 
@@ -49,6 +75,7 @@ npm run dev
 - [Руководство по монорепозиторию](./docs/MONOREPO.md)
 - [Метрики CI/CD](./docs/METRICS.md)
 - [Руководство по миграции](./docs/MIGRATION.md)
+- [Локальный деплой](./docs/LOCAL_DEPLOY.md)
 
 ## Технологии
 
